@@ -17,9 +17,7 @@ The intended usage of conversions provided by php2java.com is as a first step in
 
 ## Production Usage and Support
 
-Unless you have an enterpise support contract, using the runtime in a production environment is NOT currently supported or intended as a use of your conversion. If you choose to do so, we are not liable for any issues you experience.
-
-There is no reason why it could not be used in a production system given enough testing, but we cannot support your personal or small business application. For larger companies, see our enterprise support options at runtimeconverter.com.
+We cannot support your personal or small business application in a production environment. Use only after extesive testing and at your own risk. We cannot be held liable for any malfuctions or security lapses. For larger companies, see our enterprise support options at runtimeconverter.com.
 
 Use of the term "supported" in this document and elsewhere does not mean that we provide any warranty or expectation of support. You are welcome to raise any issues you have experienced in the "Issues" section of this repository, or privately, but they will be triaged and added to a backlog of issues and features not yet developed.
 
