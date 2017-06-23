@@ -163,3 +163,7 @@ The class ConverterRuntimeArrayContainer, along with the array functions found i
 ## ZPair
 
 ZPair is a simple key/value store used by the "ConverterRuntimeArray" interface. It includes an additional "hashOrNumericKey" private field that compares with PHP's internal implementation where numeric keys have logical significance.
+
+## Missing Features and Roadmap
+
+The most obvious missing feature as of version 1.0 is namepaces. We do not have any support yet for namespaces, but expect to add this soon. We also do not have support for pass-by-reference and variable method calls. Of those two, the pass-by-reference features would be next on the list of features. We don't yet support also dynamic object creation from withing PHP internal functions such as PDO::FETCH_OBJECT.
