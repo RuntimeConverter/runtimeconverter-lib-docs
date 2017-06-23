@@ -1,6 +1,6 @@
 # Documentation for the RuntimeConverter library
 
-The RuntimeConverter is a code coverter with an assosiated runtime library that enables the converter to fully implement all the important aspects of the PHP language into Java.
+The RuntimeConverter is a code converter with an associated runtime library that enables the converter to fully implement all the important aspects of the PHP language into Java.
 
 The RuntimeConverter is owned and operated by runtimeconverter.com, while online conversions are available from php2java.com.
 
@@ -15,11 +15,11 @@ The PHP implementation used is version 7.x. To query the exact version number, u
 
 ## Intended Usage
 
-The intended usage of conversions provided by php2java.com is as a first step in converting your website application to Java. We provide you with an application that should hopefully compile and run exactly as your old application. Nevertheless, you will likely experience various bugs resulting from the conversion. We will provide below some documentation of the internals of the runtime, but your main strategy for fixing bugs should be to convert the code to conventional Java, rather than developing with the runtime library. If there is a bug in the librray, you might report it, but better to migrate that section of your code off the runtime library.
+The intended usage of conversions provided by php2java.com is as a first step in converting your website application to Java. We provide you with an application that should hopefully compile and run exactly as your old application. Nevertheless, you will likely experience various bugs resulting from the conversion. We will provide below some documentation of the internals of the runtime, but your main strategy for fixing bugs should be to convert the code to conventional Java, rather than developing with the runtime library. If there is a bug in the library, you might report it, but better to migrate that section of your code off the runtime library.
 
 ## Production Usage and Support
 
-We cannot support your personal or small business application in a production environment. Use only after extesive testing and at your own risk. We cannot be held liable for any malfuctions or security lapses. For larger companies, see our enterprise support options at runtimeconverter.com.
+We cannot support your personal or small business application in a production environment. Use only after extensive testing and at your own risk. We cannot be held liable for any malfunctions or security lapses. For larger companies, see our enterprise support options at runtimeconverter.com.
 
 Use of the term "supported" in this document and elsewhere does not mean that we provide any warranty or expectation of support. You are welcome to raise any issues you have experienced in the "Issues" section of this repository, or privately, but they will be triaged and added to a backlog of issues and features not yet developed.
 
@@ -57,11 +57,11 @@ runtimconverter-JNI-Mac.dylib
 
 ## File Paths
 
-The runtime uses simulated file paths for includes. The root directory is based on the relative paths that you uploaded in your project zip file. It is reccommended to provide a zip file with a full directory structure. For example, if your application was in /var/www, provide a zip with code in var/www. If you upload a zip with codefiles in the top level, your code will have a simulated path of /example.php.
+The runtime uses simulated file paths for includes. The root directory is based on the relative paths that you uploaded in your project zip file. It is recommended to provide a zip file with a full directory structure. For example, if your application was in /var/www, provide a zip with code in var/www. If you upload a zip with code files in the top level, your code will have a simulated path of /example.php.
 
 ## Converted Code Structure
 
-Code conversions use the default package name of "com.project.convertedCode" as their root. Subpackages include:
+Code conversions use the default package name of "com.project.convertedCode" as their root. Sub-packages include:
 
 classes.GlobalNamespace
 
@@ -77,7 +77,7 @@ servlets
 
 "GlobalNamespace" is currently the only supported namespace. functions and classes contain functions and classes regardless of where they were defined. No overlap of names is allowed (as in PHP you could define a function in multiple places but only load one at runtime). "GlobalNamespace" is also pending a refactor to use proper lowercase "g".
 
-"includes" and "servlets" have a structure based on the simulated filepaths described above. "includes" contains the php files minus the functions and classes, while servlets are there to manage resources and load the include referenced by its URI.
+"includes" and "servlets" have a structure based on the simulated file paths described above. "includes" contains the php files minus the functions and classes, while servlets are there to manage resources and load the include referenced by its URI.
 
 "main" contains "CommandLineInterface", which loads your CLI request, and "Project" which is currently a stub file containing only the base package name for the project.
 
@@ -117,7 +117,7 @@ public interface RuntimeClassInterface {
 }
 ~~~~ 
 
-"converterRuntimeCall" is a convenience method that maps to "converterRuntimeCall". Most of these functions provide a switch mechanism to map calls and property accessors without using relection. "Class caller" is the class of the calling object. For public methods/properties, any class, such as Object.class can be used, otherwise, access levels are checked.
+"converterRuntimeCall" is a convenience method that maps to "converterRuntimeCall". Most of these functions provide a switch mechanism to map calls and property accessors without using reflection. "Class caller" is the class of the calling object. For public methods/properties, any class, such as Object.class can be used, otherwise, access levels are checked.
 
 ## Global Variables
 
@@ -125,9 +125,9 @@ Includes use shared global variables only, so they have a special "scope" object
 
 ## Includes
 
-Includes are loaded using Java relection by the "env.include" method. If you experience any issues with this, find the Java class that represents your include and its static property "instance" and call "include(RuntimeEnv env, RuntimeStack stack)" with your current stack.
+Includes are loaded using Java reflection by the "env.include" method. If you experience any issues with this, find the Java class that represents your include and its static property "instance" and call "include(RuntimeEnv env, RuntimeStack stack)" with your current stack.
 
-Includes outside of the global scope (ie. from fuctions or class methods) are not supported.
+Includes outside of the global scope (ie. from functions or class methods) are not supported.
 
 ## RuntimeEnv
 
@@ -137,15 +137,15 @@ Note that the pointer used for PHP context access a thread local and is not stor
 
 ## Removing the Runtime Library (RuntimeEnv) from your code
 
-Nearly every method of the converted code asks for a RuntimeEnv, but it is not necessarily ever used by it. The ZendFunction / LazyInitZendFunction objects, for example, do not use the RuntimeEnv object passed to them. It is merely a part of the interface specification, and can be safely replaced with "null" where the codepaths are known.
+Nearly every method of the converted code asks for a RuntimeEnv, but it is not necessarily ever used by it. The ZendFunction / LazyInitZendFunction objects, for example, do not use the RuntimeEnv object passed to them. It is merely a part of the interface specification, and can be safely replaced with "null" where the code paths are known.
 
 ## ZNull
 
-The variable ZNull is used in various places to better emulate PHP types. It is mostly equivelent to "null", though "null" represents PHP's "variable undefined" state.
+The variable ZNull is used in various places to better emulate PHP types. It is mostly equivalent to "null", though "null" represents PHP's "variable undefined" state.
 
 ## ZendFunctionPointer
 
-You can use "com.runtimeconverter.jni.ZendFunctionPointer.getFunctionPointer(String function_name)" to get a PHP function callable. The class "com.runtimeconverter.runtime.functions.LazyInitZendFunction" is used by the converter to avoid a long startup delay, but is equivelent to a ZendFunctionPointer callable.
+You can use "com.runtimeconverter.jni.ZendFunctionPointer.getFunctionPointer(String function_name)" to get a PHP function callable. The class "com.runtimeconverter.runtime.functions.LazyInitZendFunction" is used by the converter to avoid a long startup delay, but is equivalent to a ZendFunctionPointer callable.
 
 ## Arrays
 
@@ -166,4 +166,4 @@ ZPair is a simple key/value store used by the "ConverterRuntimeArray" interface.
 
 ## Missing Features and Roadmap
 
-The most obvious missing feature as of version 1.0 is namepaces. We do not have any support yet for namespaces, but expect to add this soon. We also do not have support for pass-by-reference and variable method calls. Of those two, the pass-by-reference features would be next on the list of features after namespaces. We don't yet support also dynamic object creation from withing PHP internal functions such as PDO::FETCH_OBJECT.
+The most obvious missing feature as of version 1.0 is namespaces. We do not have any support yet for namespaces, but expect to add this soon. We also do not have support for pass-by-reference and variable method calls. Of those two, the pass-by-reference features would be next on the list of features after namespaces. We don't yet support also dynamic object creation from withing PHP internal functions such as PDO::FETCH_OBJECT.
