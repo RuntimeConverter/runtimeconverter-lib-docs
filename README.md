@@ -43,6 +43,17 @@ Usage: java -classpath {...} com.project.convertedCode.main.CommandLineInterface
 
 where SCRIPT_FILEPATH is the path of the include file to load, and SIMULATED_WORKING_DIRECTORY is the working directory as you will represent it to the runtime.
 
+## Binary Download Links
+
+The current library release version is 1.0
+
+### Ubuntu Linux
+libphp7.so: ---
+runtimeconverter-JNI.so: ---
+
+### macOS
+runtimconverter-JNI-Mac.dylib: ---
+
 ## File Paths
 
 The runtime uses simulated file paths for includes. The root directory is based on the relative paths that you uploaded in your project zip file. It is reccommended to provide a zip file with a full directory structure. For example, if your application was in /var/www, provide a zip with code in var/www. If you upload a zip with codefiles in the top level, your code will have a simulated path of /example.php.
