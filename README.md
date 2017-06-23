@@ -151,14 +151,12 @@ You can use "com.runtimeconverter.jni.ZendFunctionPointer.getFunctionPointer(Str
 
 The PHP Array type is represented by the interface "com.runtimeconverter.runtime.arrays.ConverterRuntimeArray". Its concrete type is "ConverterRuntimeArrayContainer".
 
-Use either
+Use either of these methods as constructors:
 ~~~~ 
 
 public ConverterRuntimeArrayContainer(int reserve_size)
-or
 public static ConverterRuntimeArrayContainer createWithZPairs(ZPair[] input)
 ~~~~ 
-as constructors.
 
 The class ConverterRuntimeArrayContainer, along with the array functions found in "com.runtimeconverter.runtime.modules.standard.array.function_*" are extensively tested.
 
