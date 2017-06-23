@@ -45,15 +45,15 @@ where SCRIPT_FILEPATH is the path of the include file to load, and SIMULATED_WOR
 
 ## Binary Download Links
 
-The current library release version is 1.0
+The current library release version is 1.0. Download libraries using this link: ....
 
 ### Ubuntu Linux
-libphp7.so: ---
+libphp7.so
 
-runtimeconverter-JNI.so: ---
+runtimeconverter-JNI.so
 
 ### macOS
-runtimconverter-JNI-Mac.dylib: ---
+runtimconverter-JNI-Mac.dylib
 
 ## File Paths
 
