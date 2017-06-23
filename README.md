@@ -39,7 +39,7 @@ To run your project on web, just create a .WAR file and deploy it to a server su
 
 ## Run as a Command Line Application
 
-Usage: java -classpath {...} com.project.convertedCode.main.CommandLineInterface SCRIPT_FILEPATH SIMULATED_WORING_DIRECTORY
+Usage: java -classpath {...} com.project.convertedCode.main.CommandLineInterface SCRIPT_FILEPATH SIMULATED_WORING_DIRECTORY ARGUMENTS...
 
 where SCRIPT_FILEPATH is the path of the include file to load, and SIMULATED_WORKING_DIRECTORY is the working directory as you will represent it to the runtime.
 
