@@ -89,11 +89,8 @@ Functions implement the com.runtimeconverter.runtime.functions.Callable interfac
 
 ~~~~
 public interface Callable {
-
 	Object call(RuntimeEnv env, PassByReferenceArgs passByReference, Object... args);
-	
 	Object call(RuntimeEnv env, Object... args);
-	
 }
 ~~~~ 
 
@@ -105,29 +102,20 @@ Functions are used as static objects that have no state. This was to make use of
 
 Classes implement the "com.runtimeconverter.runtime.interfaces.RuntimeClassInterface".
 
-`public interface RuntimeClassInterface {
-
+~~~~
+public interface RuntimeClassInterface {
 	Object converterRuntimeCall(RuntimeEnv env, String method, Object... args);
-	
 	Object converterRuntimeCall(RuntimeEnv env, String method, Class caller, PassByReferenceArgs passByReferenceArgs, Object... args);
-	
 	void __set(Object key, Object value);
-	
 	Object __get(Object key);
-	
 	void __set(Object key, Object value, Class caller);
-	
 	Object __get(Object key, Class caller);
-	
 	boolean __isset(Object key, Class caller);
-	
 	RuntimeClassInterface phpClone();
-	
 	ConverterRuntimeArray convertToPHPArray();
-	
 	Map<String,Object> __getFieldsReadOnly();
-	
-}`
+}
+~~~~ 
 
 "converterRuntimeCall" is a convenience method that maps to "converterRuntimeCall". Most of these functions provide a switch mechanism to map calls and property accessors without using relection. "Class caller" is the class of the calling object. For public methods/properties, any class, such as Object.class can be used, otherwise, access levels are checked.
 
