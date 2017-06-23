@@ -10,6 +10,8 @@ Although the runtime library is written in Java, it uses native libraries to acc
 
 On Linux, the runtime library links dynamically with php, and so a separate php binary is available for Ubuntu Linux. On macOS, dynamic linking was not possible, and so only one native binary is needed for macOS.
 
+The PHP implementation used is version 7.x. To query the exact version number, use the "phpversion" function.
+
 
 ## Intended Usage
 
