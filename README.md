@@ -64,10 +64,15 @@ The runtime uses simulated file paths for includes. The root directory is based 
 Code conversions use the default package name of "com.project.convertedCode" as their root. Subpackages include:
 
 classes.GlobalNamespace
+
 functions.GlobalNamespace
+
 includes
+
 main
+
 namespaces
+
 servlets
 
 "GlobalNamespace" is currently the only supported namespace. functions and classes contain functions and classes regardless of where they were defined. No overlap of names is allowed (as in PHP you could define a function in multiple places but only load one at runtime). "GlobalNamespace" is also pending a refactor to use proper lowercase "g".
@@ -82,10 +87,13 @@ servlets
 
 Functions implement the com.runtimeconverter.runtime.functions.Callable interface
 
-public interface Callable {
+`public interface Callable {
+
 	Object call(RuntimeEnv env, PassByReferenceArgs passByReference, Object... args);
+	
 	Object call(RuntimeEnv env, Object... args);
-}
+	
+}`
 
 The "PassByReferenceArgs" are not now used, and class FunctionBaseRegular maps this call to the other.
 
@@ -96,16 +104,27 @@ Functions are used as static objects that have no state. This was to make use of
 Classes implement the "com.runtimeconverter.runtime.interfaces.RuntimeClassInterface".
 
 `public interface RuntimeClassInterface {
+
 	Object converterRuntimeCall(RuntimeEnv env, String method, Object... args);
+	
 	Object converterRuntimeCall(RuntimeEnv env, String method, Class caller, PassByReferenceArgs passByReferenceArgs, Object... args);
+	
 	void __set(Object key, Object value);
+	
 	Object __get(Object key);
+	
 	void __set(Object key, Object value, Class caller);
+	
 	Object __get(Object key, Class caller);
+	
 	boolean __isset(Object key, Class caller);
+	
 	RuntimeClassInterface phpClone();
+	
 	ConverterRuntimeArray convertToPHPArray();
+	
 	Map<String,Object> __getFieldsReadOnly();
+	
 }`
 
 "converterRuntimeCall" is a convenience method that maps to "converterRuntimeCall". Most of these functions provide a switch mechanism to map calls and property accessors without using relection. "Class caller" is the class of the calling object. For public methods/properties, any class, such as Object.class can be used, otherwise, access levels are checked.
@@ -143,7 +162,9 @@ You can use "com.runtimeconverter.jni.ZendFunctionPointer.getFunctionPointer(Str
 The PHP Array type is represented by the interface "com.runtimeconverter.runtime.arrays.ConverterRuntimeArray". Its concrete type is "ConverterRuntimeArrayContainer".
 
 Use either
+
 public ConverterRuntimeArrayContainer(int reserve_size)
+
 public static ConverterRuntimeArrayContainer createWithZPairs(ZPair[] input)
 
 as constructors.
