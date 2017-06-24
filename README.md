@@ -149,7 +149,7 @@ You can use "com.runtimeconverter.jni.ZendFunctionPointer.getFunctionPointer(Str
 
 ## Arrays
 
-The PHP Array type is represented by the interface "com.runtimeconverter.runtime.arrays.ConverterRuntimeArray". Its concrete type is "ConverterRuntimeArrayContainer".
+The PHP Array type is represented by the abstract class "com.runtimeconverter.runtime.arrays.ConverterRuntimeArray". Its concrete type is "ConverterRuntimeArrayContainer".
 
 Use either of these methods as constructors:
 ~~~~ 
@@ -159,6 +159,8 @@ public static ConverterRuntimeArrayContainer createWithZPairs(ZPair[] input)
 ~~~~ 
 
 The class ConverterRuntimeArrayContainer, along with the array functions found in "com.runtimeconverter.runtime.modules.standard.array.function_*" are extensively tested.
+
+ConverterRuntimeArrayContainer also implements the java.lang.Map interface which causes IntelliJ's debugger to render it as a "map", even though it is also a list. To view the underlying datastore, choose "View As" -> "Object".
 
 ## ZPair
 
