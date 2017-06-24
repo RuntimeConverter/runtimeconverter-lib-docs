@@ -169,3 +169,21 @@ ZPair is a simple key/value store used by the "ConverterRuntimeArray" interface.
 ## Missing Features and Roadmap
 
 The most obvious missing feature as of version 1.0 is namespaces. We do not have any support yet for namespaces, but expect to add this soon. We also do not have support for pass-by-reference and variable method calls. Of those two, the pass-by-reference features would be next on the list of features after namespaces. We don't yet support also dynamic object creation from withing PHP internal functions such as PDO::FETCH_OBJECT.
+
+## ZVal.assign() method
+
+Many PHP variables, such as strings and arrays, are copy-on-write types. Since the converter does not know what kind of variable that you are accessing, the ZVal.assign method is called in various places such as function returns and variable copy statements. You can safely remove these calls unless the value is an array or string which you will be modifying.
+
+## String mutability
+
+There is currently no support for string mutability. For convenience, we are using Java strings which are immutable. It may prove impossible to fully support mutable strings and java.lang.string.
+
+## Byte Arrays
+
+We are using byte[] arrays as return values from PHP function calls to more accurately represent possible binary data. These objects are converted to java.lang.String if not sent to another buffer such as "echo" output. We plan to add binary input to PHP functions as an option so that PHP cryptography functions will work properly.
+
+## ZVal Class
+
+The runtime uses java.lang.Object as its "dynamic type". There is no other common base class for the various types that are converted from PHP. The ZVal.* static functions exist to convert between types, ex. ZVal.toString(Object a). The types supported are native types: String, Integer, Long, Float, Double, Boolean, null and runtime types: ConverterRuntimeArray. There is also a php resource pointer type that does not convert, as well as RuntimeClassInterface which is used by ZVal.setProperty.
+
+The name "ZVal" is coincidentally similar to the name of the "zval" struct type which is PHP's internal storage type. This gives it a short name that has a little significance. It is not a type that can be instantiated, but a container for static type conversion methods.
