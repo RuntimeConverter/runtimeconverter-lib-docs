@@ -23,15 +23,27 @@ We cannot support your personal or small business application in a production en
 
 Use of the term "supported" in this document and elsewhere does not mean that we provide any warranty or expectation of support. You are welcome to raise any issues you have experienced in the "Issues" section of this repository, or privately, but they will be triaged and added to a backlog of issues and features not yet developed.
 
+## Conversion issues
+
+There are many reasons a conversion might fail to produce any results at all. Known conversion issues include:
+
+* Using elements not yet supported (ex. namespaces, yield, traits, etc)
+* Submitting code with parse errors anywhere in the project
+* Using functions whose definition cannot be found (this includes extensions like memcache)
+
+If that is the case, you should check back in 6 months to a year to see if your project is now.
+
+We hope to replace these fatal errors with output logs and to add the missing features and extensions in a later version of the converter and runtime library.
+
 ## Installation
 
-1. Create a read-accessible folder named "/var/runtimeconverter"
-2. Create read-write-accessible folders named "/var/runtimeconverter/sessionData" and "/var/runtimeconverter/temp".
-3. Download your platform specific binaries and place them in the "/var/runtimeconverter" folder.
-4. Create a project of some kind from your converted code zip results, such as with Eclipse or IntelliJ
-5. Download the Java dependencies and include them in your project.
-6. Download the main runtime library .JAR file and include it in your project.
-7. Attempt to compile
+1. Download the binary files (see links below)
+2. Install Java 8 if not installed already
+3. Install HomeBrew of MacPorts (macOS only) if not installed already
+4. Run the installation script for you platform and verify that the finish successfully.
+5. Create a project of some kind from your converted code zip results, such as with Eclipse or IntelliJ
+6. Include the Java dependencies (javaLibs folder and RuntimeConverterLib.jar) and include them in your project.
+7. Compile and run/deploy your project.
 
 ## Run on Web
 
@@ -43,17 +55,31 @@ Usage: java -classpath {...} com.project.convertedCode.main.CommandLineInterface
 
 where SCRIPT_FILEPATH is the path of the include file to load, and SIMULATED_WORKING_DIRECTORY is the working directory as you will represent it to the runtime.
 
+## Installation Scripts
+
+We have prepared install scripts for Ubuntu 16.04 and macOS (with MacPorts or HomeBrew). You can find the script to run in the binary archive below.
+
+For all installations, you should have a valid version of Java 8 available. On MacOS this requires the JDK. We have not tested OpenJDK, so you should use Oracle Java.
+
+On macOS, you will need to have installed either MacPorts or HomeBrew, as well as installed the Xcode command line tools and license (as a part of MacPorts and HomeBrew installation).
+
+If you experience any missing dependencies, you can re-run the scripts safely. At the end of installation, you should see the embedded PHP version number, and you can re-run that test with the "run_test.sh" script.
+
+## What the install scripts do
+1. Create a read-accessible folder named "/var/runtimeconverter"
+2. Create read-write-accessible folders named "/var/runtimeconverter/sessionData" and "/var/runtimeconverter/temp".
+3. Copy native libraries to /var/runtimeconverter
+4. Install dependencies required by the embedded php library.
+
+
 ## Binary Download Links
 
-The current library release version is 1.0. Download libraries using this link: ....
+The current library release version is 1.0. Download libraries using the links below:
 
-### Ubuntu Linux
-libphp7.so
+2017-06-26 (Version 1.0):
 
-runtimeconverter-JNI.so
+[https://s3.amazonaws.com/runtimeconverter-releases/release/1.0/runtimeConverterLib.zip](https://s3.amazonaws.com/runtimeconverter-releases/release/1.0/runtimeConverterLib.zip)
 
-### macOS
-runtimconverter-JNI-Mac.dylib
 
 ## File Paths
 
