@@ -76,14 +76,14 @@ If you experience any missing dependencies, you can re-run the scripts safely. A
 
 The current library release version is 1.0. Download libraries using the links below:
 
-2017-06-26 (Version 1.0):
+2017-06-27 (Version 1.0):
 
 [https://s3.amazonaws.com/runtimeconverter-releases/release/1.0/runtimeConverterLib.zip](https://s3.amazonaws.com/runtimeconverter-releases/release/1.0/runtimeConverterLib.zip)
 
 
 ## File Paths
 
-The runtime uses simulated file paths for includes. The root directory is based on the relative paths that you uploaded in your project zip file. It is recommended to provide a zip file with a full directory structure. For example, if your application was in /var/www, provide a zip with code in var/www. If you upload a zip with code files in the top level, your code will have a simulated path of /example.php.
+The runtime uses simulated file paths for includes. The root directory is based on the relative paths that you uploaded in your project zip file. It is recommended to provide a zip file with a full directory structure. For example, if your application was in /var/www, provide a zip with code in /var/www. If you upload a zip with code files in the top level, your code will have a simulated path of /example.php.
 
 ## Converted Code Structure
 
