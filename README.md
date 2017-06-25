@@ -80,6 +80,10 @@ The current library release version is 1.0. Download libraries using the links b
 
 [https://s3.amazonaws.com/runtimeconverter-releases/release/1.0/runtimeConverterLib.zip](https://s3.amazonaws.com/runtimeconverter-releases/release/1.0/runtimeConverterLib.zip)
 
+MD5: e003dc43093905ce37ced4c8c7580726
+
+SHA1: a64fbe1363fda2d69732adbfcb32c7c46ae63b12
+
 
 ## File Paths
 
