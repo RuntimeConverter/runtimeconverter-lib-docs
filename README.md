@@ -23,6 +23,10 @@ We cannot support your personal or small business application in a production en
 
 Use of the term "supported" in this document and elsewhere does not mean that we provide any warranty or expectation of support. You are welcome to raise any issues you have experienced in the "Issues" section of this repository, or privately, but they will be triaged and added to a backlog of issues and features not yet developed.
 
+Also, it is important to know that **code which uses the embedded PHP functions will always run slower** than the same code using PHP. This is due to the need to bridge function arguments and return values into php's native zval type before they can be used. If your site has an expected heavy load, you will want to convert at least the most heavily used portions to use native Java only.
+
+There does exist an implementation of PHP for Java (http://quercus.caucho.com/), however it is under the GPL and so would require licensing to be included in a commercial project of any kind. Enterprise support clients could negotiate their own license for it.
+
 ## Conversion issues
 
 There are many reasons a conversion might fail to produce any results at all. Known conversion issues include:
