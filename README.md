@@ -78,15 +78,17 @@ If you experience any missing dependencies, you can re-run the scripts safely. A
 
 ## Binary Download Links
 
-The current library release version is 1.0. Download libraries using the links below:
+The current library release version is 1.1. Download libraries using the links below:
 
-2017-06-27 (Version 1.0):
+**2017-06-28 (Version 1.1)**:
 
-[https://s3.amazonaws.com/runtimeconverter-releases/release/1.0/runtimeConverterLib.zip](https://s3.amazonaws.com/runtimeconverter-releases/release/1.0/runtimeConverterLib.zip)
+[https://s3.amazonaws.com/runtimeconverter-releases/release/1.1/runtimeConverterLib.zip](https://s3.amazonaws.com/runtimeconverter-releases/release/1.1/runtimeConverterLib.zip)
 
-MD5: e003dc43093905ce37ced4c8c7580726
+MD5: 6821520ebc674009a1392de99ad545df
 
-SHA1: a64fbe1363fda2d69732adbfcb32c7c46ae63b12
+SHA1: 315fdb89da5d8b1c3d3d8b060beb2595fe8146b5
+
+
 
 
 ## File Paths
