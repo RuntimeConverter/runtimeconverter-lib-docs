@@ -25,67 +25,28 @@ Use of the term "supported" in this document and elsewhere does not mean that we
 
 Also, it is important to know that **code which uses the embedded PHP functions will always run slower** than the same code using PHP. This is due to the need to bridge function arguments and return values into php's native zval type before they can be used. If your site has an expected heavy load, you will want to convert at least the most heavily used portions to use native Java only.
 
-## Conversion issues
-
-There are many reasons a conversion might fail to produce any results at all. Known conversion issues include:
-
-* Using elements not yet supported (ex. namespaces, yield, traits, etc)
-* Submitting code with parse errors anywhere in the project
-* Using functions whose definition cannot be found (this includes extensions like memcache)
-
-If that is the case, you should check back in 6 months to a year to see if your project is now.
-
-We hope to replace these fatal errors with output logs and to add the missing features and extensions in a later version of the converter and runtime library.
-
 ## Installation
 
-1. Download the binary files (see links below)
-2. Install Java 8 if not installed already
-3. Install HomeBrew of MacPorts (macOS only) if not installed already
-4. Run the installation script for you platform and verify that the finish successfully.
-5. Create a project of some kind from your converted code zip results, such as with Eclipse or IntelliJ
-6. Include the Java dependencies (javaLibs folder and RuntimeConverterLib.jar) and include them in your project.
-7. Compile and run/deploy your project.
+1. Only supported operating systems are MacOS and Ubunut 16.04
+2. Install gradle
+3. If on Ubuntu, run "sudo apt-get install mcrypt libxpm4 libjpeg8 libwebp5" to install needed extension dependencies.
 
 ## Run on Web
 
-To run your project on web, just create a .WAR file and deploy it to a server such as Tomcat 8.
+Run "gradle bootRun". Check the servlet class annotations in the "src/main/java/com/project/convertedCode/servlets" to see what paths to use. You may want to use a proxy server like apache or nginx to adjust the paths.
 
 ## Run as a Command Line Application
 
-Usage: java -classpath {...} com.project.convertedCode.main.CommandLineInterface SCRIPT_FILEPATH SIMULATED_WORING_DIRECTORY ARGUMENTS...
-
-where SCRIPT_FILEPATH is the path of the include file to load, and SIMULATED_WORKING_DIRECTORY is the working directory as you will represent it to the runtime.
-
-## Installation Scripts
-
-We have prepared install scripts for Ubuntu 16.04 and macOS (with MacPorts or HomeBrew). You can find the script to run in the binary archive below.
-
-For all installations, you should have a valid version of Java 8 available. On MacOS this requires the JDK. We have not tested OpenJDK, so you should use Oracle Java.
-
-On macOS, you will need to have installed either MacPorts or HomeBrew, as well as installed the Xcode command line tools and license (as a part of MacPorts and HomeBrew installation).
-
-If you experience any missing dependencies, you can re-run the scripts safely. At the end of installation, you should see the embedded PHP version number, and you can re-run that test with the "run_test.sh" script.
-
-## What the install scripts do
-1. Create a read-accessible folder named "/var/runtimeconverter"
-2. Create read-write-accessible folders named "/var/runtimeconverter/sessionData" and "/var/runtimeconverter/temp".
-3. Copy native libraries to /var/runtimeconverter
-4. Install dependencies required by the embedded php library.
+See the following blog entry for details: http://www.runtimeconverter.com/single-post/2017/09/26/Adding-Gradle-and-Spring-Boot
 
 
-## Binary Download Links
+## Version History
 
-The current library release version is 1.1. Download libraries using the links below:
+The current library release version is 2.0.0.
 
-**2017-06-28 (Version 1.1)**:
+**2017-06-28 (Version 1.1)**
 
-[https://s3.amazonaws.com/runtimeconverter-releases/release/1.1/runtimeConverterLib.zip](https://s3.amazonaws.com/runtimeconverter-releases/release/1.1/runtimeConverterLib.zip)
-
-MD5: 6821520ebc674009a1392de99ad545df
-
-SHA1: 315fdb89da5d8b1c3d3d8b060beb2595fe8146b5
-
+**2017-10-29 (Version 2.0.0)**
 
 
 
@@ -97,9 +58,7 @@ The runtime uses simulated file paths for includes. The root directory is based 
 
 Code conversions use the default package name of "com.project.convertedCode" as their root. Sub-packages include:
 
-classes.GlobalNamespace
-
-functions.GlobalNamespace
+globalNamespace
 
 includes
 
@@ -109,13 +68,9 @@ namespaces
 
 servlets
 
-"GlobalNamespace" is currently the only supported namespace. functions and classes contain functions and classes regardless of where they were defined. No overlap of names is allowed (as in PHP you could define a function in multiple places but only load one at runtime). "GlobalNamespace" is also pending a refactor to use proper lowercase "g".
+Each namespace contains sub-packages: functions, classes, and namespaces. The "namespaces" sub-package contains the sub-namespaces that belong to that particular namespace, if any exist. "globalNamespace" is the top level namespace.
 
 "includes" and "servlets" have a structure based on the simulated file paths described above. "includes" contains the php files minus the functions and classes, while servlets are there to manage resources and load the include referenced by its URI.
-
-"main" contains "CommandLineInterface", which loads your CLI request, and "Project" which is currently a stub file containing only the base package name for the project.
-
-"namespaces" is for static objects that refer to a namespace, in particular function implementation references. These could be user-space or php internal functions. "functions.GlobalNamespace" is not actually referenced in the converted code anywhere.
 
 ## Functions
 
